@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rat Photos</title>
+    <link rel="icon" type="image" href="favicon\favicon.ico">
+
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="home.css">
+    <link rel="script" href="script.js">
+    <script type="text/javascript" src="./sparkles.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="homepage.html">HOME</a>
+            </li>
+            <li>
+                <a href="contactus.html">CONTACT</a>
+            </li>
+            <li>
+                <a href="pricing.html">PRICING</a>
+            </li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Contact Us</h1>
+        <p>Contact us for inquires!!!!</p>
+        <br>
+
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+    </header>
+
+    <main>
+
+        <div class="gallery">
+            <img src="./src/7.jpg"/>
+            <img src="./src/8.jpg"/>
+            <br>
+            <br>
+            <img src="./src/11.jpg"/>
+            <img src="./src/10.jpg"/>
+        </div>
+
+
+        <form class="contact-form" onsubmit="return submitMessage(event);">
+
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" required>
+            <label for="fullName">Full Name</label>
+            <input type="text" name="fullName" id="fullName">
+            <label for="comment">Comment</label>
+            <textarea name="comment" id="comment" rows="3" cols="20" required>
+Leave your comment here :)
+            </textarea>
+
+            <button>Clear</button>
+            <input type="submit">
+        </form>
+    </main>
+
+
+    <footer>
+        <div class="form-title-section">
+            <h3>Contact Messages</h3>
+            <button onclick="deleteMessages();">Clear Messages</button>
+        </div>
+        <div class="form-wrapper">
+            <dl id="currentMessages">
+
+            </dl>
+        </div>
+        
+    </footer>
+
+
+    <script>
+        function deleteMessages() {
+            if (window.sessionStorage.getItem("messages")) {
+                window.sessionStorage.removeItem("messages");
+            }
+            renderMessages();
+        }
+
+        function submitMessage(event){
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const fullName = document.getElementById("fullName").value;
+            const comment = document.getElementById ("comment").value;
+
+            const messageObject = {
+                email, fullName, comment
+            };
+            
+            let currentMessages = [];
+
+            if (window.sessionStorage.getItem("messages")) {
+                currentMessages =
+                JSON.parse(
+                    window.sessionStorage.getItem("messages")
+                );
+            }
+
+            currentMessages.push(messageObject);
+            window.sessionStorage.setItem(
+                "messages",
+                JSON.stringify(currentMessages)
+            );
+
+            renderMessages();
+        }
+
+        function renderMessages() {
+            let currentMessages = [];
+
+            if (window.sessionStorage.getItem("messages")) {
+                currentMessages =
+                JSON.parse(
+                    window.sessionStorage.getItem("messages")
+                );
+            }
+
+            let listItems = [];
+            for (let i = 0; i < currentMessages.length; i++) {
+                let listItem = "";
+                const currentMessage = currentMessages[i];
+                listItem += `<dt>${currentMessage.fullName} - ${currentMessage.email}</dt>`;
+                listItem += `<dd>${currentMessage.comment}</dd>`;
+                listItem += `<br />`;
+                listItems.push(listItem);
+            }
+
+            let descList = document.getElementById('currentMessages');
+            descList.innerHTML = listItems.join('');
+        }
+
+        renderMessages();
+
+    </script>
+<footer>
+<br>
+<br>
+    <p>Copyright <script>document.write(new Date().getFullYear());</script></p>
+    <br>
+</footer>
+
+</body>
+</html>

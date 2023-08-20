@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    margin-bottom: 20px;
+    border: 40px #222;
+    cursor: pointer;
+}
+
+nav > ul {
+    list-style-type: none;
+    border: 2px solid black;
+    height: 40px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+
+nav > ul > li > a {
+    color: #222;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+nav > ul > li > a:hover {
+    color: blueviolet;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+header {
+    text-align: center;
+    font-family: cursive;
+}
+
+header > h1 {
+    margin-bottom: 10px;
+}
